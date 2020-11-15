@@ -34,10 +34,26 @@ open = True
 
 while open == True:
 
-    command = input("What do you want to buy?\n")
-    
-    if command == "apple":
-        print(apple["stock"])
-        print("You bought an apple!")
-        apple["stock"] = int(apple["stock"]) - 1
-        print(apple["stock"])
+    command = input("What do you want to do?\n(buy, money, exit)\n\n>")
+
+    if command == "buy":
+        print("Started ordering-menu...")
+
+        print("Inventory:\n")
+        for x in range(len(inventory)):
+	           print("Item: " + inventory[x]"""costs xyz$""")
+
+        #print(apple["stock"])
+        #print("You bought an apple!")
+        #apple["stock"] = int(apple["stock"]) - 1
+        #print(apple["stock"])
+        selection = input("What product do you want to buy?\n")
+
+        # TODO: if selection == xyz, charge money, reduce stock etc
+
+    elif command == "money":
+        print("Started finace-menu...")
+
+    elif command == "exit":
+        print("Exiting store...")
+        open = False
