@@ -34,6 +34,13 @@ open = True
 
 while open == True:
 
+    clear()
+
+    print("Welcome to PyStore!")
+
+    sleep(2)
+    clear()
+
     command = input("What do you want to do?\n(buy, money, exit)\n\n>")
 
     clear()
@@ -41,21 +48,25 @@ while open == True:
 
 
     if command == "buy":
-        print("Started ordering-menu...")
+        print("Starting ordering-menu...")
 
+        sleep(2)
+        clear()
 
         print("Inventory:\n")
+
         for x in range(len(inventory)):
 	           print("Item: " + inventory[x]) #costs XYZ
 
+        print("_____________")
 
         # What product the customer wants
-        selection = input("What product do you want to buy?\n>")
+        selection = input("\nWhat product do you want to buy?\n\n>")
 
         clear()
 
+        print("Prices:\n")
 
-        print("\n")
 
         if selection == "apple":
             print(str("1 apple: $") + str(apple["price"]))
@@ -72,21 +83,22 @@ while open == True:
             print(str("In stock: ") + str(mango["stock"]))
             stock = int(mango["stock"])
 
+        print("_____________")
         sleep(1)
-        print("\n")
 
-        purchase_amount = input("Specify the amount of " + str(selection) + "s you want to purchase?\n>")
+        purchase_amount = input("\nSpecify the amount of " + str(selection) + "s you want to purchase?\n\n>")
+
+        clear()
 
         if purchase_amount == "exit":
             print("Exiting store...")
+            sleep(2)
             open = False
 
-            clear()
-
         elif int(purchase_amount) <= stock:
-            purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(yes, no)\n>")
+            purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(y, n)\n\n>")
 
-            if purchase == "yes":
+            if purchase == "y":
 
                 if selection == "apple":
                     apple["stock"] = int(apple["stock"]) - int(purchase_amount)
@@ -97,8 +109,18 @@ while open == True:
                 if selection == "mango":
                     mango["stock"] = int(mango["stock"]) - int(purchase_amount)
 
+                clear()
+
+                # TODO: Add delay while ordering
+                print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!")
+
             else:
+                clear()
+
                 print("Canceled order. Thank you for visiting.")
+
+            sleep(2)
+            clear()
 
         # TODO: if selection == xyz, charge money, reduce stock etc
         #print(apple["stock"])
