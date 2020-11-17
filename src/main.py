@@ -83,7 +83,7 @@ while open == True:
 
             clear()
 
-        elif int(purchase_amount) < stock:
+        elif int(purchase_amount) <= stock:
             purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(yes, no)\n>")
 
             if purchase == "yes":
@@ -96,7 +96,7 @@ while open == True:
 
                 if selection == "mango":
                     mango["stock"] = int(mango["stock"]) - int(purchase_amount)
-                    
+
             else:
                 print("Canceled order. Thank you for visiting.")
 
