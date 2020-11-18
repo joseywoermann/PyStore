@@ -17,13 +17,13 @@ apple = {
 
 banana = {
     "category": "fruit",
-    "price": 1,
+    "price": 3,
     "stock": 20
 }
 
 mango = {
     "category": "fruit",
-    "price": 3,
+    "price": 5,
     "stock": 15
 }
 
@@ -110,21 +110,30 @@ while open == True:
         elif int(purchase_amount) <= stock:
             purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(y, n)\n\n>")
 
+
             if purchase == "y":
 
                 if selection == "apple":
                     apple["stock"] = int(apple["stock"]) - int(purchase_amount)
+                    bill = int(purchase_amount) * int(apple["price"])
 
                 if selection == "banana":
                     banana["stock"] = int(banana["stock"]) - int(purchase_amount)
+                    bill = int(purchase_amount) * int(banana["price"])
 
                 if selection == "mango":
                     mango["stock"] = int(mango["stock"]) - int(purchase_amount)
+                    bill = int(purchase_amount) * int(mango["price"])
+
 
                 clear()
 
-                # TODO: Add delay while ordering
-                print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!")
+                # Charge customer some money and add that to the sore's "bank-account"
+                money["customer"] = money["customer"] - int(bill)
+                money["store"] = money["store"] + int(bill)
+
+                sleep(2)
+                print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
 
             else:
                 clear()
@@ -135,7 +144,7 @@ while open == True:
             clear()
 
 
-        # TODO: if selection == xyz, charge money, reduce stock etc
+
         #print(apple["stock"])
         #print("You bought an apple!")
         #apple["stock"] = int(apple["stock"]) - 1
