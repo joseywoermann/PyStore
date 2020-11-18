@@ -28,9 +28,21 @@ mango = {
 }
 
 
+# Finances
+
+money = {
+    "bank": 1000000, # 1mil
+    "store": 1000, #1K
+    "customer": 100
+}
+
+
 # Is the store open?
 open = True
 
+clear()
+print("Starting PyStore...")
+sleep(2)
 
 while open == True:
 
@@ -38,7 +50,7 @@ while open == True:
 
     print("Welcome to PyStore!")
 
-    sleep(2)
+    sleep(1)
     clear()
 
     command = input("What do you want to do?\n(buy, money, exit)\n\n>")
@@ -122,6 +134,7 @@ while open == True:
             sleep(2)
             clear()
 
+
         # TODO: if selection == xyz, charge money, reduce stock etc
         #print(apple["stock"])
         #print("You bought an apple!")
@@ -129,11 +142,21 @@ while open == True:
         #print(apple["stock"])
 
 
-
+    # TODO: Make sub-menus
 
     elif command == "money":
-        print("Started finace-menu...")
+        print("Started finance menu..")
+        sleep(1)
+        clear()
+        print("You have $" + str(money["customer"]) + ".")
+        sleep(2)
 
+    elif command == "money store":
+        print("Started finance menu..")
+        sleep(1)
+        clear()
+        print("The store has $" + str(money["store"]) + ".")
+        sleep(2)
 
 
     elif command == "exit":
