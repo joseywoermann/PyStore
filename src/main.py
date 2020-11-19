@@ -113,35 +113,48 @@ while open == True:
 
             if purchase == "y":
 
+                clear()
+
                 if selection == "apple":
-                    apple["stock"] = int(apple["stock"]) - int(purchase_amount)
                     bill = int(purchase_amount) * int(apple["price"])
 
                 if selection == "banana":
-                    banana["stock"] = int(banana["stock"]) - int(purchase_amount)
                     bill = int(purchase_amount) * int(banana["price"])
 
                 if selection == "mango":
-                    mango["stock"] = int(mango["stock"]) - int(purchase_amount)
                     bill = int(purchase_amount) * int(mango["price"])
 
 
-                clear()
+                # Buy if enough money
+                if money["customer"] >= int(bill):
 
-                # Charge customer some money and add that to the sore's "bank-account"
-                money["customer"] = money["customer"] - int(bill)
-                money["store"] = money["store"] + int(bill)
+                    if selection == "apple":
+                        apple["stock"] = int(apple["stock"]) - int(purchase_amount)
 
+                    if selection == "banana":
+                        banana["stock"] = int(banana["stock"]) - int(purchase_amount)
+
+
+                    if selection == "mango":
+                        mango["stock"] = int(mango["stock"]) - int(purchase_amount)
+
+
+                    # Charge customer some money and add that to the sore's "bank-account"
+                    money["customer"] = money["customer"] - int(bill)
+                    money["store"] = money["store"] + int(bill)
+
+                    print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
+
+                else:
+                    print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - money["customer"]))
                 sleep(2)
-                print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
+                clear()
 
             else:
                 clear()
 
                 print("Canceled order. Thank you for visiting.")
-
-            sleep(2)
-            clear()
+                sleep(2)
 
 
 
@@ -150,8 +163,6 @@ while open == True:
         #apple["stock"] = int(apple["stock"]) - 1
         #print(apple["stock"])
 
-
-    # TODO: Make sub-menus
 
     elif command == "money":
         print("Started finance menu..")
