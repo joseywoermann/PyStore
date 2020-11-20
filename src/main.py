@@ -65,6 +65,7 @@ while open == True:
         sleep(2)
         clear()
 
+        print("Your money: $" + str(money["customer"]) + "\n")
         print("Inventory:\n")
 
         for x in range(len(inventory)):
@@ -76,6 +77,7 @@ while open == True:
         selection = input("\nWhat product do you want to buy?\n\n>")
 
         clear()
+        print("Your money: $" + str(money["customer"]) + "\n")
 
         print("Prices:\n")
 
@@ -101,6 +103,7 @@ while open == True:
         purchase_amount = input("\nSpecify the amount of " + str(selection) + "s you want to purchase?\n\n>")
 
         clear()
+        print("Your money: $" + str(money["customer"]) + "\n")
 
         if purchase_amount == "exit":
             print("Exiting store...")
@@ -114,6 +117,7 @@ while open == True:
             if purchase == "y":
 
                 clear()
+                print("Your money: $" + str(money["customer"]) + "\n")
 
                 if selection == "apple":
                     bill = int(purchase_amount) * int(apple["price"])
@@ -149,9 +153,11 @@ while open == True:
                     print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - money["customer"]))
                 sleep(2)
                 clear()
+                print("Your money: $" + str(money["customer"]) + "\n")
 
             else:
                 clear()
+                print("Your money: $" + str(money["customer"]) + "\n")
 
                 print("Canceled order. Thank you for visiting.")
                 sleep(2)
