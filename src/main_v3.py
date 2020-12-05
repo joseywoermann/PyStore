@@ -21,26 +21,26 @@ inventory = ['apple', 'banana', 'mango']
 # Import all required data from JSONs
 
 # Items
-apple = open("./data/inventory/apple.json", "r+")
-banana = open("./data/inventory/banana.json", "r+")
-mango = open("./data/inventory/mango.json", "r+")
+apple_file = open("./data/inventory/apple.json", "r+")
+details_apple = json.load(apple_file)
+#apple_file.close()
+
+banana_file = open("./data/inventory/banana.json", "r+")
+details_banana = json.load(banana_file)
+#banana_file.close()
+
+mango_file = open("./data/inventory/mango.json", "r+")
+details_mango = json.load(mango_file)
+#mango_file.close()
 
 # Money
-customer = open("./data/money/customer_money.json", "r+")
-store = open("./data/money/store_money.json", "r+")
+customer_file = open("./data/money/customer_money.json", "r+")
+money_customer = json.load(customer_file)
+#customer_file.close()
 
-
-
-# Read those files
-
-# Items
-details_apple = json.load(apple)
-details_banana = json.load(banana)
-details_mango = json.load(mango)
-
-# Money
-money_customer = json.load(customer)
-money_store = json.load(store)
+store_file = open("./data/money/store_money.json", "r+")
+money_store = json.load(store_file)
+#store_file.close()
 
 
 
@@ -52,6 +52,8 @@ print("Starting PyStore...")
 sleep(2)
 
 while open == True:
+
+
 
     clear()
 
@@ -138,7 +140,7 @@ while open == True:
 
                 # Buy if enough money
                 if money_customer["money"] >= int(bill):
-
+                    """
                     if selection == "apple":
                         apple["stock"] = int(apple["stock"]) - int(purchase_amount)
 
@@ -148,13 +150,33 @@ while open == True:
 
                     if selection == "mango":
                         mango["stock"] = int(mango["stock"]) - int(purchase_amount)
+                    """
+
+
 
 
                     # Charge customer some money and add that to the sore's "bank-account"
-                    money["customer"] = money["customer"] - int(bill)
-                    money["store"] = money["store"] + int(bill)
+
+
+                    """
+                    money_customer["money"] = 123
+
+                    mango_file = open("mango.json", "w")
+                    json.dump(money_customer, mango_file, indent = 2, sort_keys=True)
+                    mango_file.close()
+                    """
+                    money_customer["money"] = money_customer["money"] - int(bill)
+                    money_store["money"] = money_store["money"] + int(bill)
+
+                    json.dump(money_customer, customer_file, indent = 2, sort_keys=True)
+                    json.dump(money_store, store_file, indent = 2, sort_keys=True)
+
+
 
                     print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
+
+
+
 
                 else:
                     print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - money_customer["money"]))
