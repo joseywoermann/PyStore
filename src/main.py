@@ -44,7 +44,7 @@ clear()
 print("Starting PyStore...")
 sleep(2)
 
-while open == True:
+while open is True:
 
     clear()
 
