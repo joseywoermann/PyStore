@@ -1,2 +1,2 @@
-python src/main.py
+python src/PyStore.py
 pause
