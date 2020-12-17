@@ -29,17 +29,17 @@ userdata["money"] = 100
 storedata["money"] = 10000
 
 with open("./data/money/customer_money.json", "w") as userfile:
-    json.dump(userdata, userfile)
+    json.dump(userdata, userfile, indent=2)
 
 with open("./data/money/store_money.json", "w") as storefile:
-    json.dump(storedata, storefile)
+    json.dump(storedata, storefile, indent=2)
 
 
 with open("./data/inventory/apple.json", "w") as applefile:
-    appledata = json.dump(mangodata, applefile)
+    appledata = json.dump(mangodata, applefile, indent=2)
 
 with open("./data/inventory/banana.json", "w") as bananafile:
-    bananadata = json.dump(bananadata, bananafile)
+    bananadata = json.dump(bananadata, bananafile, indent=2)
 
 with open("./data/inventory/mango.json", "w") as mangofile:
-    mangodata = json.dump(mangodata, mangofile)
+    mangodata = json.dump(mangodata, mangofile, indent=2)
