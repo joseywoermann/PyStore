@@ -20,9 +20,17 @@ userdata = {}
 storedata = {}
 
 
-appledata["stock"] = 15
+appledata["category"] = "fruit"
+appledata["stock"] = 30
+appledata["price"]  = 1
+
+bananadata["category"] = "fruit"
 bananadata["stock"] = 20
+bananadata["price"]  = 2
+
+mangodata["category"] = "fruit"
 mangodata["stock"] = 15
+mangodata["price"]  = 3
 
 
 userdata["money"] = 100
@@ -36,7 +44,7 @@ with open("./data/money/store_money.json", "w") as storefile:
 
 
 with open("./data/inventory/apple.json", "w") as applefile:
-    appledata = json.dump(mangodata, applefile, indent=2)
+    appledata = json.dump(appledata, applefile, indent=2)
 
 with open("./data/inventory/banana.json", "w") as bananafile:
     bananadata = json.dump(bananadata, bananafile, indent=2)

@@ -105,6 +105,11 @@ while openstore is True:
             sleep(2)
             openstore = False
 
+        elif int(purchase_amount) > stock:
+            print("There is not enough stock at the moment!")
+            sleep(2)
+            clear()
+
         elif int(purchase_amount) <= stock:
             purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(y, n)\n\n>")
 
@@ -129,16 +134,22 @@ while openstore is True:
 
                     if selection == "apple":
                         appledata["stock"] = int(appledata["stock"]) - int(purchase_amount)
+                        appledata["category"] = "fruit"
+                        appledata["price"]  = 1
 
                     if selection == "banana":
                         bananadata["stock"] = int(bananadata["stock"]) - int(purchase_amount)
-
+                        bananadata["category"] = "fruit"
+                        bananadata["price"]  = 2
 
                     if selection == "mango":
                         mangodata["stock"] = int(mangodata["stock"]) - int(purchase_amount)
+                        mangodata["category"] = "fruit"
+                        mangodata["price"]  = 3
 
                     userdata["money"] = userdata["money"] - int(bill)
                     storedata["money"] = storedata["money"] + int(bill)
+
 
                     # Charge customer some money and add that to the sore's "bank-account"
                     with open("./data/money/customer_money.json", "w") as userfile:
@@ -149,7 +160,7 @@ while openstore is True:
 
 
                     with open("./data/inventory/apple.json", "w") as applefile:
-                        appledata = json.dump(mangodata, applefile, indent=2)
+                        appledata = json.dump(appledata, applefile, indent=2)
 
                     with open("./data/inventory/banana.json", "w") as bananafile:
                         bananadata = json.dump(bananadata, bananafile, indent=2)
