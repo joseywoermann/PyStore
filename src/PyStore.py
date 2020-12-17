@@ -9,8 +9,6 @@ clear = lambda: os.system('cls')
 inventory = ['apple', 'banana', 'mango']
 
 
-
-
 # Is the store open?
 openstore = True
 
@@ -48,20 +46,12 @@ while openstore is True:
 
 
     clear()
-
     print("Welcome to PyStore!")
-
     sleep(1)
     clear()
 
-
-
-
     command = input("What do you want to do?\n(buy, money, exit)\n\n>")
-
     clear()
-
-
 
     if command == "buy":
         print("Starting ordering-menu...")
@@ -73,7 +63,7 @@ while openstore is True:
         print("Inventory:\n")
 
         for x in range(len(inventory)):
-               print("Item: " + inventory[x]) #costs XYZ
+               print("Item: " + inventory[x])
 
         print("_____________")
 
@@ -109,10 +99,11 @@ while openstore is True:
         clear()
         print("Your money: $" + str(userdata["money"]) + "\n")
 
+
         if purchase_amount == "exit":
             print("Exiting store...")
             sleep(2)
-            #open = False
+            openstore = False
 
         elif int(purchase_amount) <= stock:
             purchase = input("Do you want to purchase " + str(purchase_amount) + " " + str(selection) + "s?\n(y, n)\n\n>")
@@ -146,14 +137,10 @@ while openstore is True:
                     if selection == "mango":
                         mangodata["stock"] = int(mangodata["stock"]) - int(purchase_amount)
 
-
-
-
-
-                    # Charge customer some money and add that to the sore's "bank-account"
                     userdata["money"] = userdata["money"] - int(bill)
                     storedata["money"] = storedata["money"] + int(bill)
 
+                    # Charge customer some money and add that to the sore's "bank-account"
                     with open("./data/money/customer_money.json", "w") as userfile:
                         json.dump(userdata, userfile, indent=2)
 
@@ -170,12 +157,7 @@ while openstore is True:
                     with open("./data/inventory/mango.json", "w") as mangofile:
                         mangodata = json.dump(mangodata, mangofile, indent=2)
 
-
-
                     print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
-
-
-
 
                 else:
                     print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - userdata["money"]))
@@ -189,8 +171,6 @@ while openstore is True:
 
                 print("Canceled order. Thank you for visiting.")
                 sleep(2)
-
-
 
     elif command == "money":
         print("Started finance menu..")
