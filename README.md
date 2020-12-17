@@ -1,7 +1,7 @@
 # PyStore
 
 PyStore is a digital store application, where you can buy certain items.
-I made this project in order to learn how to worl with JSON files in a "real-world-scenario".
+I made this project in order to learn how to work with JSON files in a "real-world-scenario".
 
 # Features
 * View how much money you have
