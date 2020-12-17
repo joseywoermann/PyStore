@@ -1,6 +1,12 @@
+"""
+TODO:
+-files can't be updated while the script is running, JSONs must be re-loaded when needed
+-overwrite values in JSONs
+"""
+
 from time import sleep
 import os
-
+import json
 
 clear = lambda: os.system('cls')
 
@@ -9,32 +15,33 @@ clear = lambda: os.system('cls')
 inventory = ['apple', 'banana', 'mango']
 
 
-apple = {
-    "category": "fruit",
-    "price": 2,
-    "stock": 10
-}
-
-banana = {
-    "category": "fruit",
-    "price": 3,
-    "stock": 20
-}
-
-mango = {
-    "category": "fruit",
-    "price": 5,
-    "stock": 15
-}
 
 
-# Finances
 
-money = {
-    "bank": 1000000, # 1mil
-    "store": 1000, #1K
-    "customer": 100
-}
+# Import all required data from JSONs
+
+# Items
+apple = open("./data/inventory/apple.json", "r+")
+banana = open("./data/inventory/banana.json", "r+")
+mango = open("./data/inventory/mango.json", "r+")
+
+# Money
+customer = open("./data/money/customer_money.json", "r+")
+store = open("./data/money/store_money.json", "r+")
+
+
+
+# Read those files
+
+# Items
+details_apple = json.load(apple)
+details_banana = json.load(banana)
+details_mango = json.load(mango)
+
+# Money
+money_customer = json.load(customer)
+money_store = json.load(store)
+
 
 
 # Is the store open?
@@ -65,7 +72,7 @@ while open is True:
         sleep(2)
         clear()
 
-        print("Your money: $" + str(money["customer"]) + "\n")
+        print("Your money: $" + str(money_customer["money"]) + "\n")
         print("Inventory:\n")
 
         for x in range(len(inventory)):
@@ -77,25 +84,25 @@ while open is True:
         selection = input("\nWhat product do you want to buy?\n\n>")
 
         clear()
-        print("Your money: $" + str(money["customer"]) + "\n")
+        print("Your money: $" + str(money_customer["money"]) + "\n")
 
         print("Prices:\n")
 
 
         if selection == "apple":
-            print(str("1 apple: $") + str(apple["price"]))
-            print(str("In stock: ") + str(apple["stock"]))
-            stock = int(apple["stock"])
+            print(str("1 apple: $") + str(details_apple["price"]))
+            print(str("In stock: ") + str(details_apple["stock"]))
+            stock = int(details_apple["stock"])
 
         if selection == "banana":
-            print(str("1 banana: $") + str(banana["price"]))
-            print(str("In stock: ") + str(banana["stock"]))
-            stock = int(banana["stock"])
+            print(str("1 banana: $") + str(details_banana["price"]))
+            print(str("In stock: ") + str(details_banana["stock"]))
+            stock = int(details_banana["stock"])
 
         if selection == "mango":
-            print(str("1 mango: $") + str(mango["price"]))
-            print(str("In stock: ") + str(mango["stock"]))
-            stock = int(mango["stock"])
+            print(str("1 mango: $") + str(details_mango["price"]))
+            print(str("In stock: ") + str(details_mango["stock"]))
+            stock = int(details_mango["stock"])
 
         print("_____________")
         sleep(1)
@@ -103,7 +110,7 @@ while open is True:
         purchase_amount = input("\nSpecify the amount of " + str(selection) + "s you want to purchase?\n\n>")
 
         clear()
-        print("Your money: $" + str(money["customer"]) + "\n")
+        print("Your money: $" + str(money_customer["money"]) + "\n")
 
         if purchase_amount == "exit":
             print("Exiting store...")
@@ -117,20 +124,20 @@ while open is True:
             if purchase == "y":
 
                 clear()
-                print("Your money: $" + str(money["customer"]) + "\n")
+                print("Your money: $" + str(money_customer["money"]) + "\n")
 
                 if selection == "apple":
-                    bill = int(purchase_amount) * int(apple["price"])
+                    bill = int(purchase_amount) * int(details_apple["price"])
 
                 if selection == "banana":
-                    bill = int(purchase_amount) * int(banana["price"])
+                    bill = int(purchase_amount) * int(details_banana["price"])
 
                 if selection == "mango":
-                    bill = int(purchase_amount) * int(mango["price"])
+                    bill = int(purchase_amount) * int(details_mango["price"])
 
 
                 # Buy if enough money
-                if money["customer"] >= int(bill):
+                if money_customer["money"] >= int(bill):
 
                     if selection == "apple":
                         apple["stock"] = int(apple["stock"]) - int(purchase_amount)
@@ -150,38 +157,32 @@ while open is True:
                     print("Thank you for ordering " + str(purchase_amount) + " " + str(selection) + "s!\nYou paid: $" + str(bill))
 
                 else:
-                    print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - money["customer"]))
+                    print("You don't have enough money to purchase " + str(purchase_amount) + " " + str(selection) + "s." + " You need $" + str(bill - money_customer["money"]))
                 sleep(2)
                 clear()
-                print("Your money: $" + str(money["customer"]) + "\n")
+                print("Your money: $" + str(money_customer["money"]) + "\n")
 
             else:
                 clear()
-                print("Your money: $" + str(money["customer"]) + "\n")
+                print("Your money: $" + str(money_customer["money"]) + "\n")
 
                 print("Canceled order. Thank you for visiting.")
                 sleep(2)
 
 
 
-        #print(apple["stock"])
-        #print("You bought an apple!")
-        #apple["stock"] = int(apple["stock"]) - 1
-        #print(apple["stock"])
-
-
     elif command == "money":
         print("Started finance menu..")
         sleep(1)
         clear()
-        print("You have $" + str(money["customer"]) + ".")
+        print("You have $" + str(money_customer["money"]) + ".")
         sleep(2)
 
     elif command == "money store":
         print("Started finance menu..")
         sleep(1)
         clear()
-        print("The store has $" + str(money["store"]) + ".")
+        print("The store has $" + str(money_customer["money"]) + ".")
         sleep(2)
 
 
