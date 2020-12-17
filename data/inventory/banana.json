@@ -1,3 +1,5 @@
 {
-  "stock": 20
+  "category": "fruit",
+  "stock": 20,
+  "price": 2
 }
